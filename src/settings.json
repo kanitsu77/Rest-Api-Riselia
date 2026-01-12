@@ -1,0 +1,75 @@
+"{
+  "name": "Riselia Rest API",
+  "version": "v1.0.0",
+  "description": "Simple and easy to use API.",
+  "bannerImage": "/src/banner.jpg",
+  "header": {
+    "status": "Online!"
+  },
+  "apiSettings": {
+    "creator": "Nixx || Mahpud", 
+    "apikey": ["Admin#123"]
+  },
+  "categories": [
+    {
+      "name": "AI (Artificial Intelligence)",
+      "items": [
+        {
+          "name": "LuminAI",
+          "desc": "Talk with luminai",
+          "path": "/ai/luminai?text=",
+          "status": "ready",
+          "params": {
+            "text": "Text for luminai to respond to"
+          }
+        },
+       {
+          "name": "HydroMind",
+          "desc": "See the list of supported AI models here: https://mind.hydrooo.web.id",
+          "path": "/ai/hydromind?text=&model=",
+          "status": "ready",
+          "params": {
+            "text": "Teks atau perintah untuk chat AI",
+            "model":"1See the list of supported AI models here: https://mind.hydrooo.web.id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Random",
+      "items": [
+        {
+          "name": "Blue Archive",
+          "desc": "Blue Archive Random Images",
+          "path": "/random/ba",
+          "status": "ready"
+        }
+      ]
+    },
+    {
+      "name": "Maker",
+      "items": [
+      {
+        "name": "Brat",
+        "desc": "Generite text brat image",
+        "path": "/maker/brat",
+        "status": "ready"
+      }
+      ]
+    },
+    {
+      "name": "Search Tools",
+      "items": [
+        {
+          "name": "YouTube",
+          "desc": "Video search",
+          "path": "/search/youtube?q=",
+          "status": "ready",
+          "params": {
+            "q": "Search query"
+          }
+        }
+      ]
+    }               
+  ]
+}
