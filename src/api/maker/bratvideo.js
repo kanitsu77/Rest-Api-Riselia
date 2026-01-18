@@ -1,9 +1,8 @@
 const axios = require('axios');
 
 module.exports = function (app) {
-  app.get('/maker/bratvideo', async (req, res) => {
+  app.get('/maker/brat', async (req, res) => {
     const { text } = req.query;
-
     if (!text) {
       return res.status(400).json({
         status: false,
@@ -27,11 +26,11 @@ module.exports = function (app) {
 
       res.end(Buffer.from(response.data));
 
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
       res.status(500).json({
         status: false,
-        message: 'Failed to generate brat video'
+        message: 'Failed to generate brat Video'
       });
     }
   });
