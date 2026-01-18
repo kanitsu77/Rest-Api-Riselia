@@ -43,6 +43,12 @@
           "desc": "Blue Archive Random Images",
           "path": "/random/ba",
           "status": "ready"
+        },
+        {
+          "name": "Lolo",
+          "desc": "Loli Random Images",
+          "path": "/random/loli",
+          "status": "ready"
         }
       ]
     },
@@ -57,6 +63,16 @@
   "type": "image",
   "params": {
     "text": "Teks untuk gambar brat"
+  }
+},
+        {
+  "name": "Brat Video",
+  "desc": "Generate text brat video",
+  "path": "/maker/bratvideo",
+  "status": "ready",
+  "type": "video",
+  "params": {
+    "text": "Teks untuk video brat"
   }
 }
       ]
