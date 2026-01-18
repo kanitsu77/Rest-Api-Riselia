@@ -375,7 +375,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         if (DOM.apiLinksContainer) {
             DOM.apiLinksContainer.innerHTML = ''; 
-            const defaultLinks = [{ url: "https://github.com/Kanitsu77", name: "Lihat di GitHub", icon: "fab fa-github" }];
+            const defaultLinks = [{ url: "https://whatsapp.com/channel/0029VbA24ZeDeON84qUO5P0z", name: "Support Owner", icon: "fab fa-whatsapp" }];
             const linksToRender = settings.links?.length ? settings.links : defaultLinks;
 
             linksToRender.forEach(({ url, name, icon }, index) => {
@@ -970,4 +970,5 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Jalankan inisialisasi utama
     init();
+
 });
