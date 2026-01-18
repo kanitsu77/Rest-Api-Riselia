@@ -45,7 +45,7 @@
           "status": "ready"
         },
         {
-          "name": "Lolo",
+          "name": "Loli",
           "desc": "Loli Random Images",
           "path": "/random/loli",
           "status": "ready"
@@ -68,7 +68,7 @@
         {
   "name": "Brat Video",
   "desc": "Generate text brat video",
-  "path": "/maker/bratvideo",
+  "path": "/maker/bratvideo?text=",
   "status": "ready",
   "type": "video",
   "params": {
