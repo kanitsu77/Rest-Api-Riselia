@@ -2,7 +2,13 @@ const axios = require('axios');
 
 module.exports = function (app) {
   app.get('/maker/brat', async (req, res) => {
-    const text = req.query.text || 'Hello World';
+    const { text } = req.query;
+    if (!text) {
+      return res.status(400).json({
+        status: false,
+        message: "Parameter 'text' wajib diisi"
+      });
+    }
 
     try {
       const response = await axios.get(
