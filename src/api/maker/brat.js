@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 module.exports = function(app) {
-  app.get('/brat', async (req, res) => {
+  app.get('/maker/brat', async (req, res) => {
     const { text } = req.query;
     if (!text) return res.status(400).send("Query 'text' required");
 
