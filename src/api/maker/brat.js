@@ -1,15 +1,8 @@
 const axios = require('axios');
 
-module.exports = (app) => {
+module.exports = function (app) {
   app.get('/maker/brat', async (req, res) => {
-    const { text } = req.query;
-
-    if (!text) {
-      return res.status(400).json({
-        status: false,
-        message: "Query parameter 'text' is required"
-      });
-    }
+    const text = req.query.text || 'Hello World';
 
     try {
       const response = await axios.get(
@@ -20,14 +13,18 @@ module.exports = (app) => {
         }
       );
 
-      res.setHeader('Content-Type', 'image/png');
-      res.send(response.data);
+      res.writeHead(200, {
+        'Content-Type': 'image/png',
+        'Content-Length': response.data.length
+      });
 
-    } catch (err) {
-      console.error(err);
+      res.end(Buffer.from(response.data));
+
+    } catch (error) {
+      console.error(error);
       res.status(500).json({
         status: false,
-        message: "Failed to generate brat image"
+        message: 'Failed to generate brat image'
       });
     }
   });
