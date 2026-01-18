@@ -1,4 +1,4 @@
-"{
+{
   "name": "Riselia Rest API",
   "version": "v1.0.0",
   "description": "Simple and easy to use API.",
@@ -7,7 +7,7 @@
     "status": "Online!"
   },
   "apiSettings": {
-    "creator": "Nixx || Mahpud", 
+    "creator": "Nixx || Mahpud",
     "apikey": ["Admin#123"]
   },
   "categories": [
@@ -23,14 +23,14 @@
             "text": "Text for luminai to respond to"
           }
         },
-       {
+        {
           "name": "HydroMind",
           "desc": "See the list of supported AI models here: https://mind.hydrooo.web.id",
           "path": "/ai/hydromind?text=&model=",
           "status": "ready",
           "params": {
             "text": "Teks atau perintah untuk chat AI",
-            "model":"1See the list of supported AI models here: https://mind.hydrooo.web.id"
+            "model": "See the list of supported AI models here: https://mind.hydrooo.web.id"
           }
         }
       ]
@@ -49,12 +49,12 @@
     {
       "name": "Maker",
       "items": [
-      {
-        "name": "Brat",
-        "desc": "Generite text brat image",
-        "path": "/maker/brat",
-        "status": "ready"
-      }
+        {
+          "name": "Brat",
+          "desc": "Generate text brat image",
+          "path": "/maker/brat",
+          "status": "ready"
+        }
       ]
     },
     {
@@ -70,6 +70,6 @@
           }
         }
       ]
-    }               
+    }
   ]
 }
