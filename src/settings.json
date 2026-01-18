@@ -49,12 +49,15 @@
     {
       "name": "Maker",
       "items": [
-        {
-          "name": "Brat",
-          "desc": "Generate text brat image",
-          "path": "/maker/brat",
-          "status": "ready"
+       {
+       "name": "Brat",
+       "desc": "Generate text brat image",
+       "path": "/maker/brat",
+       "status": "ready",
+        "params": {
+         "text": "Teks untuk gambar brat"
         }
+       }
       ]
     },
     {
