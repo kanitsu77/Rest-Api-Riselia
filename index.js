@@ -1,74 +1,141 @@
 const express = require('express');
-const chalk = require('chalk');
 const fs = require('fs');
 const cors = require('cors');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 4000;
 
+/* ========================
+   BASIC CONFIG
+======================== */
 app.enable("trust proxy");
 app.set("json spaces", 2);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-app.use('/', express.static(path.join(__dirname, 'api-page')));
-app.use('/src', express.static(path.join(__dirname, 'src')));
 
-const settingsPath = path.join(__dirname, './src/settings.json');
-const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf-8'));
+/* ========================
+   STATIC FILES
+======================== */
+const apiPagePath = path.join(__dirname, 'api-page');
+const srcPath = path.join(__dirname, 'src');
 
+if (fs.existsSync(apiPagePath)) {
+  app.use('/', express.static(apiPagePath));
+}
+
+if (fs.existsSync(srcPath)) {
+  app.use('/src', express.static(srcPath));
+}
+
+/* ========================
+   SETTINGS (SAFE LOAD)
+======================== */
+let settings = {
+  apiSettings: {
+    creator: "Created Using Rynn UI"
+  }
+};
+
+const settingsPath = path.join(__dirname, 'src/settings.json');
+if (fs.existsSync(settingsPath)) {
+  try {
+    settings = JSON.parse(fs.readFileSync(settingsPath, 'utf-8'));
+  } catch (e) {
+    console.error("Failed to load settings.json");
+  }
+}
+
+/* ========================
+   RESPONSE WRAPPER
+======================== */
 app.use((req, res, next) => {
-    const originalJson = res.json;
-    res.json = function (data) {
-        if (data && typeof data === 'object') {
-            const responseData = {
-                status: data.status,
-                creator: settings.apiSettings.creator || "Created Using Rynn UI",
-                ...data
-            };
-            return originalJson.call(this, responseData);
-        }
-        return originalJson.call(this, data);
-    };
-    next();
-});
-
-// Api Route
-let totalRoutes = 0;
-const apiFolder = path.join(__dirname, './src/api');
-fs.readdirSync(apiFolder).forEach((subfolder) => {
-    const subfolderPath = path.join(apiFolder, subfolder);
-    if (fs.statSync(subfolderPath).isDirectory()) {
-        fs.readdirSync(subfolderPath).forEach((file) => {
-            const filePath = path.join(subfolderPath, file);
-            if (path.extname(file) === '.js') {
-                require(filePath)(app);
-                totalRoutes++;
-                console.log(chalk.bgHex('#FFFF99').hex('#333').bold(` Loaded Route: ${path.basename(file)} `));
-            }
-        });
+  const originalJson = res.json;
+  res.json = function (data) {
+    if (data && typeof data === 'object') {
+      return originalJson.call(this, {
+        creator: settings.apiSettings?.creator || "Created Using Rynn UI",
+        ...data
+      });
     }
+    return originalJson.call(this, data);
+  };
+  next();
 });
-console.log(chalk.bgHex('#90EE90').hex('#333').bold(' Load Complete! ✓ '));
-console.log(chalk.bgHex('#90EE90').hex('#333').bold(` Total Routes Loaded: ${totalRoutes} `));
 
+/* ========================
+   API ROUTE LOADER (SAFE)
+======================== */
+const apiFolder = path.join(__dirname, 'src/api');
+
+if (fs.existsSync(apiFolder)) {
+  fs.readdirSync(apiFolder).forEach((subfolder) => {
+    const subfolderPath = path.join(apiFolder, subfolder);
+
+    if (fs.statSync(subfolderPath).isDirectory()) {
+      fs.readdirSync(subfolderPath).forEach((file) => {
+        if (file.endsWith('.js')) {
+          try {
+            require(path.join(subfolderPath, file))(app);
+          } catch (err) {
+            console.error(`Failed loading route: ${file}`);
+          }
+        }
+      });
+    }
+  });
+}
+
+/* ========================
+   MAIN PAGE
+======================== */
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'api-page', 'index.html'));
+  const indexFile = path.join(apiPagePath, 'index.html');
+  if (fs.existsSync(indexFile)) {
+    res.sendFile(indexFile);
+  } else {
+    res.json({
+      status: true,
+      message: "API is running"
+    });
+  }
 });
 
-app.use((req, res, next) => {
-    res.status(404).sendFile(process.cwd() + "/api-page/404.html");
+/* ========================
+   404 HANDLER
+======================== */
+app.use((req, res) => {
+  const notFound = path.join(apiPagePath, '404.html');
+  if (fs.existsSync(notFound)) {
+    res.status(404).sendFile(notFound);
+  } else {
+    res.status(404).json({
+      status: false,
+      message: "404 Not Found"
+    });
+  }
 });
 
+/* ========================
+   ERROR HANDLER
+======================== */
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).sendFile(process.cwd() + "/api-page/500.html");
+  console.error(err);
+  const errorPage = path.join(apiPagePath, '500.html');
+  if (fs.existsSync(errorPage)) {
+    res.status(500).sendFile(errorPage);
+  } else {
+    res.status(500).json({
+      status: false,
+      message: "Internal Server Error"
+    });
+  }
 });
 
-app.listen(PORT, () => {
-    console.log(chalk.bgHex('#90EE90').hex('#333').bold(` Server is running on port ${PORT} `));
-});
-
+/* ========================
+   IMPORTANT FOR VERCEL
+======================== */
+// ❌ JANGAN app.listen()
+// ✅ EXPORT SAJA
 module.exports = app;
