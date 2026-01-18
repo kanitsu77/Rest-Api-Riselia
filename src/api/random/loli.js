@@ -9,7 +9,7 @@ module.exports = function(app) {
             throw error;
         }
     }
-    app.get('/random/ba', async (req, res) => {
+    app.get('/random/loli', async (req, res) => {
         try {
             const pedo = await loli();
             res.writeHead(200, {
