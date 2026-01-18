@@ -68,7 +68,7 @@
         {
   "name": "Brat Video",
   "desc": "Generate text brat video",
-  "path": "/maker/bratvideo",
+  "path": "/maker/bratvideo?text=",
   "status": "ready",
   "type": "video",
   "params": {
