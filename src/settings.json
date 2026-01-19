@@ -32,6 +32,15 @@
             "text": "Teks atau perintah untuk chat AI",
             "model": "See the list of supported AI models here: https://mind.hydrooo.web.id"
           }
+        },
+        {
+          "name": "Cici / Dola",
+          "desc": "Ask To Cici / Dola",
+          "path": "/ai/cici?text=",
+          "status": "ready",
+          "params": {
+            "text": "Teks atau perintah untuk chat AI",            
+          }
         }
       ]
     },
@@ -64,17 +73,7 @@
   "params": {
     "text": "Teks untuk gambar brat"
   }
-},
-        {
-  "name": "BratVid",
-          "desc": "Generate text brat animated gif",
-          "path": "/maker/bratvid?text=",
-          "status": "ready",
-          "type": "image/gif",
-          "params": {
-            "text": "Text to generate brat animated gif"
-         }
-        }
+       }        
       ]
     },
     {
