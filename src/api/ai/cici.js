@@ -12,59 +12,67 @@ module.exports = function (app) {
         const random = rnd()
         const cdid = '2' + rndHex().padStart(23, '0')
 
+        const body = {
+            channel: 3,
+            cmd: 100,
+            sequence_id: randomUUID(),
+            uplink_body: {
+                send_message_body: {
+                    ack_only: false,
+                    bot_id: '7241547611541340167',
+                    bot_type: 1,
+                    content: JSON.stringify({
+                        im_cmd: -1,
+                        text: question
+                    }),
+                    content_type: 1,
+                    conversation_id: '485805516280081',
+                    conversation_type: 3,
+                    create_time: Math.floor(Date.now() / 1000),
+                    ext: {
+                        system_language: 'en',
+                        is_audio: 'false',
+                        need_net_search: '0'
+                    },
+                    local_message_id: rndHex(),
+                    sender_id: '7584067883349640200',
+                    unique_key: rndHex()
+                }
+            },
+            version: '1'
+        }
+
+        const params = {
+            device_platform: 'android',
+            os: 'android',
+            aid: '489823',
+            app_name: 'nova_ai',
+            language: 'en',
+            region: 'US',
+            carrier_region: 'ID',
+            tz_name: 'Asia/Shanghai',
+            _rticket: random,
+            cdid,
+            uid: rnd(),
+            iid: rnd(),
+            device_id: rnd()
+        }
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'Accept-Encoding': 'gzip',
+            'User-Agent': 'com.larus.wolf/8090004 (Android 12)',
+            'X-Tt-Token': 'ISI_TOKEN_ASLI_DI_SINI'
+        }
+
         const { data: rawData } = await axios.post(
             'https://api-normal-i18n.ciciai.com/im/sse/send/message',
+            body,
             {
-                channel: 3,
-                cmd: 100,
-                sequence_id: randomUUID(),
-                uplink_body: {
-                    send_message_body: {
-                        ack_only: false,
-                        bot_id: '7241547611541340167',
-                        bot_type: 1,
-                        content: JSON.stringify({
-                            im_cmd: -1,
-                            text: question
-                        }),
-                        content_type: 1,
-                        conversation_id: '485805516280081',
-                        conversation_type: 3,
-                        create_time: Math.floor(Date.now() / 1000),
-                        ext: {
-                            system_language: 'en',
-                            is_audio: 'false',
-                            need_net_search: '0'
-                        },
-                        local_message_id: rndHex(),
-                        sender_id: '7584067883349640200',
-                        unique_key: rndHex()
-                    }
-                },
-                version: '1'
-            },
-            {
-                params: {
-                    device_platform: 'android',
-                    os: 'android',
-                    aid: '489823',
-                    app_name: 'nova_ai',
-                    language: 'en',
-                    region: 'US',
-                    carrier_region: 'ID',
-                    tz_name: 'Asia/Shanghai',
-                    _rticket: random,
-                    cdid,
-                    uid: rnd(),
-                    iid: rnd(),
-                    device_id: rnd()
-                },
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept-Encoding': 'gzip',
-                    'User-Agent': 'com.larus.wolf/8090004 (Android 12)',
-                    'X-Tt-Token': 'PUT_YOUR_TOKEN_HERE'
-                }
+                params,
+                headers,
+                responseType: 'text',
+                timeout: 20000
             }
         )
 
@@ -102,7 +110,7 @@ module.exports = function (app) {
             }
         }
 
-        if (!chat) throw new Error('Gagal mengambil jawaban dari Cici')
+        if (!chat) throw new Error('Jawaban kosong atau token invalid')
 
         return {
             chat,
@@ -130,11 +138,12 @@ module.exports = function (app) {
                 sources: data.sources
             })
         } catch (error) {
+            console.error(error.response?.data || error.message)
             res.status(500).json({
                 creator: 'Nixx',
                 status: false,
-                error: error.message
+                error: error.response?.data || error.message
             })
         }
     })
-}         
+                }
