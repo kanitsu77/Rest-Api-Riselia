@@ -12,7 +12,7 @@ module.exports = function (app) {
 
     try {
       const response = await axios.get(
-        'https://api-faa.my.id/faa/bratvid',
+        'https://api.deline.web.id/maker/bratvid',
         {
           params: { text },
           responseType: 'arraybuffer'
