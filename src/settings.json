@@ -39,7 +39,7 @@
           "path": "/ai/cici?text=",
           "status": "ready",
           "params": {
-            "text": "Teks atau perintah untuk chat AI",            
+            "text": "Teks atau perintah untuk chat AI"     
           }
         }
       ]
