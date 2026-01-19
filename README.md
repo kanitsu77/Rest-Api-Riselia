@@ -1,8 +1,8 @@
-# Falcon API UI
+# Riselia Rest-APIs
 
-A modern, clean, and user-friendly interface for browsing and testing Falcon API endpoints.
+A modern, clean, and user-friendly interface for browsing and testing Riselia APIs endpoints.
 
-![Falcon API UI Screenshot](image.png)
+![Riselia API UI Screenshot](image.png)
 
 ## Features
 
