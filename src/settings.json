@@ -73,7 +73,8 @@
           "type": "image/gif",
           "params": {
             "text": "Text to generate brat animated gif"
-}
+         }
+        }
       ]
     },
     {
