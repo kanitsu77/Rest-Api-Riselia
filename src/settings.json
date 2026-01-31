@@ -46,7 +46,7 @@
     },
     {
       "name": "Download",
-      "item": [
+      "items": [
         {
           "name": "Ytmp 3",
           "desc": "Download Youtube Audio",
