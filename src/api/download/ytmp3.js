@@ -15,8 +15,7 @@ module.exports = function(app) {
             const info = await ytdl.getInfo(url);
             const audioFormat = ytdl.chooseFormat(info.formats, { quality: 'highestaudio', filter: 'audioonly' });
 
-            res.status(200).json({
-                creator: "Nixx",
+            res.status(200).json({                
                 status: true,
                 result: {
                     imgurl: info.videoDetails.thumbnails[info.videoDetails.thumbnails.length - 1].url,
@@ -27,7 +26,7 @@ module.exports = function(app) {
                 }
             });
         } catch (error) {
-            res.status(500).json({ creator: "Nixx", status: false, error: error.message });
+            res.status(500).json({ status: false, error: error.message });
         }
     });
 };
