@@ -1,7 +1,7 @@
 
 module.exports = function(app) {
     const ytdl = require('ytdl-core');
-    app.get('/download/ytmp3', async (req, res) => {
+    app.get('/search/ytmp3', async (req, res) => {
         const { url } = req.query;
         if (!url) {
             return res.status(400).json({ status: false, error: 'URL is required' });
