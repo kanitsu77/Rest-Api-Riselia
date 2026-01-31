@@ -175,7 +175,7 @@ module.exports = function(app) {
                 message: result.chat
             });
         } catch (error) {
-            res.status(500).json({ creatot: "Nixx", status: false, error: error.message });
+            res.status(500).json({ creator: "Nixx", status: false, error: error.message });
         }
     });
 }
