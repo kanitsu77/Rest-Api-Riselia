@@ -168,11 +168,11 @@ module.exports = function(app) {
             if (!text) {
                 return res.status(400).json({ status: false, error: 'Text is required' });
             }
-            const { result } = await ciciai(text);
+            const result  = await ciciai(text);
             res.status(200).json({
                 creator: "Nixx",
                 status: true,
-                result
+                message: result.chat
             });
         } catch (error) {
             res.status(500).json({ creatot: "Nixx", status: false, error: error.message });
