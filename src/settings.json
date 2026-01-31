@@ -45,6 +45,20 @@
       ]
     },
     {
+      "name": "Download",
+      "item": [
+        {
+          "name": "Ytmp 3",
+          "desc": "Download Youtube Audio",
+          "path": "download/ytmp3?url=",
+          "status": "ready",
+          "params": {
+            "url": "Url Youtube"
+          }
+        }
+      ]
+    },
+    {
       "name": "Random",
       "items": [
         {
