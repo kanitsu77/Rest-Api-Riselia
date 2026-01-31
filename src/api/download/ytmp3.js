@@ -1,6 +1,6 @@
-const ytdl = require('ytdl-core');
 
 module.exports = function(app) {
+    const ytdl = require('ytdl-core');
     app.get('/download/ytmp3', async (req, res) => {
         const { url } = req.query;
         if (!url) {
