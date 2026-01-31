@@ -20,6 +20,7 @@
     "fs": "^0.0.1-security",
     "https": "^1.0.0",
     "node-fetch": "^2.6.1",
+    "ytdl-core": "^4.11.1",
     "yt-search": "^2.12.1"
   }
 }
