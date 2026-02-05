@@ -157,6 +157,69 @@
     }
   }
 },
+"/ai/dola": {
+  "get": {
+    "summary": "Dola AI Chat",
+    "description": "Mengirim pertanyaan ke model Dola AI dan mendapatkan jawaban final.",
+    "tags": ["AI"],
+    "parameters": [
+      {
+        "name": "message",
+        "in": "query",
+        "required": true,
+        "description": "Teks atau pertanyaan yang ingin dikirim ke Dola AI",
+        "schema": { "type": "string" }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Berhasil mendapatkan jawaban dari Dola AI",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "type": "boolean", "example": true },
+                "result": {
+                  "type": "string",
+                  "example": "Halo! Saya Dola AI, siap membantu Anda menjawab pertanyaan atau membuat konten kreatif."
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Request invalid, message kosong",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "type": "boolean", "example": false },
+                "error": { "type": "string", "example": "Pesan wajib diisi" }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Gagal memproses request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "type": "boolean", "example": false },
+                "error": { "type": "string", "example": "Gagal memproses request" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
 "/anime/waifu": {
   "get": {
     "summary": "Waifu",
