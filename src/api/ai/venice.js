@@ -36,7 +36,7 @@ module.exports = function(app) {
                 }
             });
 
-            // Parsing chunks
+            
             const chunks = data
                 .split('\n')
                 .filter(Boolean)
@@ -48,7 +48,7 @@ module.exports = function(app) {
 
             let result = chunks.map(chunk => chunk?.content ?? '').join('');
 
-            // Bersihkan escape & whitespace berlebih
+            
             result = result.replace(/\\"/g, '"')
                            .replace(/^"(.*)"$/, '$1')
                            .replace(/\\n/g, ' ')
@@ -64,7 +64,7 @@ module.exports = function(app) {
         }
     }
 
-    // Route API
+    
     app.get('/ai/venice', async (req, res) => {
         const { message } = req.query;
 
@@ -78,12 +78,13 @@ module.exports = function(app) {
         try {
             const result = await venicechat(message);
             res.json({
-                status: true,
-                creator: "Z7:林企业",
+                creator: "Nixx",
+                status: true,            
                 result
             });
         } catch (error) {
             res.status(500).json({
+                creator: "Nixx",
                 status: false,
                 error: error.message
             });
