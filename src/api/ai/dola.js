@@ -166,28 +166,25 @@ async function dola(question) {
 
     
     app.get('/ai/dola', async (req, res) => {
-        const { message } = req.query;
+  const { message } = req.query
 
-        if (!message) {
-            return res.status(400).json({
-                status: false,
-                error: "Pesan wajib diisi"
-            });
-        }
+  if (!message) {
+    return res.status(400).json({
+      status: false,
+      error: "Pesan wajib diisi"
+    })
+  }
 
-        try {
-            const result = await dola(message);
-            res.json({
-                creatot: "Nixx",
-                status: true,              
-                result: result.chat
-            });
-        } catch (error) {
-            res.status(500).json({
-                creator: "Nixx",
-                status: false,
-                error: error.message
-            });
-        }
-    });
-};
+  try {
+    const result = await dola(message)
+    res.json({
+      status: true,
+      result: result.chat
+    })
+  } catch (error) {
+    res.status(500).json({
+      status: false,
+      error: error.message
+    })
+  }
+})
