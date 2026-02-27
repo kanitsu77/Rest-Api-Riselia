@@ -1,0 +1,21 @@
+{
+  "Developer": "Nixx",
+  "Apikey": "Tee",
+  "APIs": {
+    "categories": {
+      "Ai": [
+        {
+          "name": "Dola",
+          "description": "Ai Smart By Dola",
+          "status": "ready",
+          "path": "ai/dola",
+          "apikey": true,
+          "type": "json",
+          "params": {
+            "q": "Ask To Dola"
+          }
+        }
+      ]
+    }
+  }
+}
