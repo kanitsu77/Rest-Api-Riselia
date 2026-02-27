@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "api-page")));
 
 // SETTINGS
-const settingsPath = path.join(__dirname, "api", "settings.json");
+const settingsPath = path.join(__dirname, "api", "data-api.json");
 
 let settings = { apiSettings: { creator: "Created Using Nixx" } };
 if (fs.existsSync(settingsPath)) {
